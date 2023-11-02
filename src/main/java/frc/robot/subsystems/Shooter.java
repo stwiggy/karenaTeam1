@@ -14,9 +14,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
-
-  CANSparkMax shooterMotor = MotorControllerFactory.createSparkMax(5, MotorConfig.NEO);
+  CANSparkMax shooterMotor = MotorControllerFactory.createSparkMax(3, MotorConfig.NEO);
   RelativeEncoder shootEncoder = shooterMotor.getEncoder();
+
+  //ask about using CANSparkMax's built in pid controller vs this one, what are differences?
   PIDController pid = new PIDController(Constants.kP, Constants.kI, Constants.kD);
   private double goalRPM = 0;
 
@@ -25,10 +26,10 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
     SmartDashboard.putNumber("Shooter speed", shootEncoder.getVelocity());
     SmartDashboard.putNumber("Shooter goal", goalRPM);
 
+    //getVelocity gets the current RPM
     if (goalRPM != 0){
       double pidOut = pid.calculate(shootEncoder.getVelocity(), goalRPM);
       SmartDashboard.putNumber("PID output", pidOut);
@@ -36,7 +37,6 @@ public class Shooter extends SubsystemBase {
     }
   }
 
-  //getVelocity gets the RPM
   public void setStdRPM(){
     goalRPM = Constants.kShootWantedRPM;
   }

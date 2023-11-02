@@ -5,45 +5,35 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.Shooter;
-
-import org.carlmontrobotics.lib199.MotorConfig;
-import org.carlmontrobotics.lib199.MotorControllerFactory;
-import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class Shoot extends CommandBase {
-  CANSparkMax shooterMotor = MotorControllerFactory.createSparkMax(5, MotorConfig.NEO);
   Shooter shooter;
   double startTime;
   double time;
   public boolean shouldShoot = false;
+
   /** Creates a new Shoot. */
   public Shoot(Shooter shiter) {
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter = shiter);
   }
 
-
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     startTime = Timer.getFPGATimestamp();
     shooter.setStdRPM();
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     shooter.stopShooter();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return Timer.getFPGATimestamp() - startTime > 5;

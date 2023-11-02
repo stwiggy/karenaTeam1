@@ -23,26 +23,23 @@ public class RobotContainer {
   public static final Shooter shooter = new Shooter();
   public static XboxController controller = new XboxController(0);
 
-  public static CANSparkMax intakeMotor = MotorControllerFactory.createSparkMax(4, MotorConfig.NEO);
+  public static CANSparkMax intakeMotor = MotorControllerFactory.createSparkMax(2, MotorConfig.NEO);
 
   public RobotContainer() {
     intakeMotor.set(1);
     configureBindings();
   }
 
-  //create buttons and give them something to do
+  //bind buttons and commands
   private void configureBindings() {
 
-    //shoots ball out
     JoystickButton buttonA = new JoystickButton(controller, 1);
 
     //make button to turn on/off intake?
     //JoystickButton buttonB = new JoystickButton(controller, 2);
 
-    //button x changes the drive to TANK
     JoystickButton buttonX = new JoystickButton(controller, 3);
 
-    //button y changes the drive to ARCADE
     JoystickButton buttonY = new JoystickButton(controller, 4);
 
     buttonA.onTrue(new Shoot(shooter));
@@ -60,8 +57,6 @@ public class RobotContainer {
       //drivetrain.arcadeDrive(controller.getRawAxis(1), controller.getRawAxis(4));
       drivetrain.arcadeDrive(controller.getLeftY(), 0 - controller.getRightX());
     }
-
-
   }
 
   public Command getAutonomousCommand(){
