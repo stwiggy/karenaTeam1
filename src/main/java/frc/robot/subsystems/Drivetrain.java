@@ -15,9 +15,7 @@ public class Drivetrain extends SubsystemBase {
     //if this starts as false, it will be arcade
     public boolean isTank = true;
     
-    public Drivetrain(){
-
-    }
+    public Drivetrain(){}
 
     public void drive(double leftY, double rightY){
         leftMotor.set(Math.pow(leftY, 3));
