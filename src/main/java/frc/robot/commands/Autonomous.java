@@ -16,13 +16,13 @@ public class Autonomous extends CommandBase {
   Drivetrain drivetrain;
   private final Timer time = new Timer();
   CANSparkMax TEST = MotorControllerFactory.createSparkMax(9, MotorConfig.NEO);
+
   /** Creates a new Autonomous. */
   public Autonomous(Drivetrain dt) {
     this.drivetrain = dt;
     addRequirements(drivetrain);
   }
 
-  //ask if initialize starts when the robot starts or when auto starts
   @Override
   public void initialize() {
     time.start();
