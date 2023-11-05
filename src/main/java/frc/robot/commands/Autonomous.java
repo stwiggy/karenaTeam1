@@ -6,27 +6,32 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
+import org.carlmontrobotics.lib199.MotorConfig;
+import org.carlmontrobotics.lib199.MotorControllerFactory;
+import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.Timer;
 
+//this should work now
 public class Autonomous extends CommandBase {
   Drivetrain drivetrain;
-  double startTime;
-  double time;
-
+  private final Timer time = new Timer();
+  CANSparkMax TEST = MotorControllerFactory.createSparkMax(9, MotorConfig.NEO);
   /** Creates a new Autonomous. */
   public Autonomous(Drivetrain dt) {
-    addRequirements(drivetrain = dt);
+    this.drivetrain = dt;
+    addRequirements(drivetrain);
   }
 
+  //ask if initialize starts when the robot starts or when auto starts
   @Override
   public void initialize() {
-    startTime = Timer.getFPGATimestamp();
+    time.start();
+    //drivetrain.drive(0.5, 0.5);
+    TEST.set(0.5);
   }
 
   @Override
   public void execute() {
-    time = Timer.getFPGATimestamp();
-    drivetrain.drive(1, 1);
   }
 
   @Override
@@ -34,6 +39,6 @@ public class Autonomous extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return time - startTime > 15;
+    return time.get() > 5;
   }
 }

@@ -9,19 +9,19 @@ import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
     private static CANSparkMax leftMotor = MotorControllerFactory.createSparkMax(0, MotorConfig.NEO);
-    private static CANSparkMax rightMotor = MotorControllerFactory.createSparkMax(1, MotorConfig.NEO);
+    private static CANSparkMax rightMotor = MotorControllerFactory.createSparkMax(9, MotorConfig.NEO);
 
     //if this starts as true, it will be tank
     //if this starts as false, it will be arcade
-    public boolean isTank = true;
+    public boolean isTank = false;
     
     public Drivetrain(){}
-
+    /*
     public void drive(double leftY, double rightY){
         leftMotor.set(Math.pow(leftY, 3));
         rightMotor.set(Math.pow(-rightY ,3));
     }
-
+    */
     public void arcadeDrive(double speed, double turn){
         speed *= Constants.kSpeedSlowdown;
         turn *= Constants.kTurnSlowdown;
@@ -29,6 +29,10 @@ public class Drivetrain extends SubsystemBase {
         double left = speed + turn;
         double right = speed - turn;
         
-        drive(left, right);
+        //drive(left, right);
+        leftMotor.set(left);
+        rightMotor.set(-right);
     }
+    
+    //change isTank to true after testing arcadeDrive
 }
