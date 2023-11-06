@@ -16,13 +16,23 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
   CANSparkMax shooterMotor = MotorControllerFactory.createSparkMax(5, MotorConfig.NEO);
   RelativeEncoder shootEncoder = shooterMotor.getEncoder();
+  public int onOff = 0;
 
   //ask about using CANSparkMax's built in pid controller vs this one, what are differences?
-  PIDController pid = new PIDController(Constants.kP, Constants.kI, Constants.kD);
+  PIDController pid = new PIDController(Constants.Shooter.kP, Constants.Shooter.kI, Constants.Shooter.kD);
   private double goalRPM = 0;
 
   /** Creates a new Shooter. */
   public Shooter() {}
+
+
+  public void setStdRPM(){
+    goalRPM = Constants.Shooter.kShootWantedRPM;
+  }
+
+  public void stopShooter(){
+    goalRPM = 0;
+  }
 
   @Override
   public void periodic() {
@@ -35,13 +45,13 @@ public class Shooter extends SubsystemBase {
       SmartDashboard.putNumber("PID output", pidOut);
       shooterMotor.set(pidOut);
     }
+
+    if (onOff % 2 == 0){
+      setStdRPM();
+    }
+    else{
+      stopShooter();
+    }
   }
 
-  public void setStdRPM(){
-    goalRPM = Constants.kShootWantedRPM;
-  }
-
-  public void stopShooter(){
-    goalRPM = 0;
-  }
 }
