@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import org.carlmontrobotics.lib199.MotorControllerFactory;
@@ -10,10 +11,12 @@ import frc.robot.Constants;
 public class Drivetrain extends SubsystemBase {
     private static CANSparkMax leftMotor = MotorControllerFactory.createSparkMax(0, MotorConfig.NEO);
     private static CANSparkMax rightMotor = MotorControllerFactory.createSparkMax(9, MotorConfig.NEO);
-
+    private XboxController controller;
     public boolean isTank = false;
     
-    public Drivetrain(){}
+    public Drivetrain(XboxController controller){
+        this.controller = controller;
+    }
 
     public void drive(double leftY, double rightY){
         leftMotor.set(Math.pow(leftY, 3));
@@ -30,5 +33,15 @@ public class Drivetrain extends SubsystemBase {
         //drive(left, right);
         leftMotor.set(left);
         rightMotor.set(-right);
+    }
+
+    @Override
+    public void periodic(){
+        if (isTank){
+            drive(0 - controller.getLeftY(), 0 - controller.getRightY());
+        }
+        else{
+            arcadeDrive(0 - controller.getLeftY(), 0 - controller.getRightX());
+        }
     }
 }

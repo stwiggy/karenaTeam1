@@ -14,10 +14,11 @@ import frc.robot.commands.Autonomous;
 import frc.robot.subsystems.Intaker;
 
 public class RobotContainer {
-  public static final Drivetrain drivetrain = new Drivetrain();
   public static final Intaker intaker = new Intaker();
   public static final Shooter shooter = new Shooter();
   public static final XboxController controller = new XboxController(0);
+  public static final Drivetrain drivetrain = new Drivetrain(controller);
+
 
   public RobotContainer() {
     configureBindings();
@@ -25,32 +26,13 @@ public class RobotContainer {
 
   //bind buttons and commands
   private void configureBindings() {
-
     JoystickButton buttonA = new JoystickButton(controller, 1);
-
     JoystickButton buttonX = new JoystickButton(controller, 3);
-
     JoystickButton buttonY = new JoystickButton(controller, 4);
 
     buttonA.onTrue(new InstantCommand(() -> {intaker.onOff++;}));
     buttonX.onTrue(new InstantCommand(() -> {drivetrain.isTank = true;}));
     buttonY.onTrue(new InstantCommand(() -> {drivetrain.isTank = false;}));
-  }
-
-  public void periodic(){
-    if (drivetrain.isTank == true){
-      drivetrain.drive(0 - controller.getLeftY(), 0 - controller.getRightY());   
-    }
-    else {
-      drivetrain.arcadeDrive(0 - controller.getLeftY(), 0 - controller.getRightX());
-    }
-    
-    if (intaker.onOff % 2 == 0){
-      intaker.stop();
-    }
-    else{
-      intaker.suck();
-    }
   }
 
   public Command getAutonomousCommand(){

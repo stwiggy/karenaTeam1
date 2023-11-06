@@ -7,7 +7,6 @@ package frc.robot.subsystems;
 import org.carlmontrobotics.lib199.MotorConfig;
 import org.carlmontrobotics.lib199.MotorControllerFactory;
 import com.revrobotics.CANSparkMax;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intaker extends SubsystemBase {
@@ -17,17 +16,21 @@ public class Intaker extends SubsystemBase {
   /** Creates a new Intaker. */
   public Intaker() {}
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    SmartDashboard.putNumber("on(even) or off(odd)", onOff);
-  }
-
   public void suck(){
     intakeMotor.set(0.75);
   }
 
   public void stop(){
     intakeMotor.set(0);
+  }
+
+  @Override
+  public void periodic(){
+    if (onOff % 2 == 0){
+      stop();
+    }
+    else{
+      suck();
+    }
   }
 }
