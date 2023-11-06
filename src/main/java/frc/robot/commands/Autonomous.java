@@ -6,16 +6,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
-import org.carlmontrobotics.lib199.MotorConfig;
-import org.carlmontrobotics.lib199.MotorControllerFactory;
-import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.Timer;
 
 //this should work now
 public class Autonomous extends CommandBase {
   Drivetrain drivetrain;
   private final Timer time = new Timer();
-  CANSparkMax TEST = MotorControllerFactory.createSparkMax(2, MotorConfig.NEO);
 
   /** Creates a new Autonomous. */
   public Autonomous(Drivetrain dt) {
@@ -25,9 +21,9 @@ public class Autonomous extends CommandBase {
 
   @Override
   public void initialize() {
+    time.reset();
     time.start();
-    //drivetrain.drive(0.5, 0.5);
-    TEST.set(0.5);
+    drivetrain.drive(0.5, 0.5);
   }
 
   @Override
@@ -35,7 +31,9 @@ public class Autonomous extends CommandBase {
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    drivetrain.drive(0, 0);
+  }
 
   @Override
   public boolean isFinished() {
