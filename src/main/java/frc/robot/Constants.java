@@ -13,11 +13,33 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static final double kTurnSlowdown = 0.3;
-    public static final double kSpeedSlowdown = 0.6;
+    public static class Autonomous {
+        public static final double kLeftAutoSpeed = 0.5;
+        public static final double kRightAutoSpeed = 0.5;
+        public static final int kAutoLength = 5;
+    }
 
-    public static final double kP = 0.01;
-    public static final double kI = 0;
-    public static final double kD = 0;
-    public static final double kShootWantedRPM = 4000;
+    public static class Drivetrain {
+        public static final double kTurnSlowdown = 0.3;
+        public static final double kSpeedSlowdown = 0.6;
+    }
+
+    public static class Shooter{
+        public static final double kP = 0.01;
+        public static final double kI = 0;
+        public static final double kD = 0;
+        public static final double kShootWantedRPM = 4000;
+    }
+
+    public static class OI{
+        public static final int kControllerPort = 0;
+        public static final int kOperatorPort = 1;
+
+        public static final int kButtonANum = 1;
+        public static final int kButtonBNum = 2;
+        public static final int kButtonXNum = 3;
+        public static final int kButtonYNum = 4;
+        public static final int kLeftBumperNum = 5;
+        public static final int kRightBumperNum = 6;
+    }
 }

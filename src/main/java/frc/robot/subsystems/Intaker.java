@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intaker extends SubsystemBase {
+  public boolean off = false;
   public int onOff = 0;
   private static CANSparkMax intakeMotor = MotorControllerFactory.createSparkMax(3, MotorConfig.NEO);
 
@@ -22,6 +23,11 @@ public class Intaker extends SubsystemBase {
 
   public void stop(){
     intakeMotor.set(0);
+  }
+
+  //how to call functions in lambda?
+  public void onOff(){
+    off = !off;
   }
 
   @Override

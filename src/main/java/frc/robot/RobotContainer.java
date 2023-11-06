@@ -16,7 +16,8 @@ import frc.robot.subsystems.Intaker;
 public class RobotContainer {
   public static final Intaker intaker = new Intaker();
   public static final Shooter shooter = new Shooter();
-  public static final XboxController controller = new XboxController(0);
+  public static final XboxController controller = new XboxController(Constants.OI.kControllerPort);
+  public static final XboxController operator = new XboxController(Constants.OI.kOperatorPort);
   public static final Drivetrain drivetrain = new Drivetrain(controller);
 
 
@@ -26,13 +27,23 @@ public class RobotContainer {
 
   //bind buttons and commands
   private void configureBindings() {
-    JoystickButton buttonA = new JoystickButton(controller, 1);
-    JoystickButton buttonX = new JoystickButton(controller, 3);
-    JoystickButton buttonY = new JoystickButton(controller, 4);
+    //these buttons a and b r for testing
+    JoystickButton buttonA1 = new JoystickButton(controller, Constants.OI.kButtonANum);
+    JoystickButton buttonB1 = new JoystickButton(controller, Constants.OI.kButtonBNum);
+    JoystickButton buttonX1 = new JoystickButton(controller, Constants.OI.kButtonXNum);
+    JoystickButton buttonY1 = new JoystickButton(controller, Constants.OI.kButtonYNum);
 
-    buttonA.onTrue(new InstantCommand(() -> {intaker.onOff++;}));
-    buttonX.onTrue(new InstantCommand(() -> {drivetrain.isTank = true;}));
-    buttonY.onTrue(new InstantCommand(() -> {drivetrain.isTank = false;}));
+    JoystickButton leftBumper = new JoystickButton(controller, Constants.OI.kLeftBumperNum);
+    JoystickButton rightBumper = new JoystickButton(controller, Constants.OI.kRightBumperNum);
+    JoystickButton buttonA2 = new JoystickButton(operator, Constants.OI.kButtonANum);
+    JoystickButton buttonB2 = new JoystickButton(operator, Constants.OI.kButtonBNum);
+    JoystickButton buttonX2 = new JoystickButton(operator, Constants.OI.kButtonXNum);
+    JoystickButton buttonY2 = new JoystickButton(operator, Constants.OI.kButtonYNum);
+
+    buttonA1.onTrue(new InstantCommand(() -> {intaker.onOff++;}));
+    buttonB1.onTrue(new InstantCommand(() -> {shooter.onOff++;}));
+    buttonX1.onTrue(new InstantCommand(() -> {drivetrain.isTank = true;}));
+    buttonY1.onTrue(new InstantCommand(() -> {drivetrain.isTank = false;}));
   }
 
   public Command getAutonomousCommand(){

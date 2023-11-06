@@ -24,8 +24,8 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void arcadeDrive(double speed, double turn){
-        speed *= Constants.kSpeedSlowdown;
-        turn *= Constants.kTurnSlowdown;
+        speed *= Constants.Drivetrain.kSpeedSlowdown;
+        turn *= Constants.Drivetrain.kTurnSlowdown;
         
         double left = speed + turn;
         double right = speed - turn;

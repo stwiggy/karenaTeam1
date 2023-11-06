@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -15,15 +16,14 @@ public class Autonomous extends CommandBase {
 
   /** Creates a new Autonomous. */
   public Autonomous(Drivetrain dt) {
-    this.drivetrain = dt;
-    addRequirements(drivetrain);
+    addRequirements(drivetrain = dt);
   }
 
   @Override
   public void initialize() {
     time.reset();
     time.start();
-    drivetrain.drive(0.5, 0.5);
+    drivetrain.drive(Constants.Autonomous.kLeftAutoSpeed, Constants.Autonomous.kRightAutoSpeed);
   }
 
   @Override
@@ -37,6 +37,6 @@ public class Autonomous extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return time.get() > 5;
+    return time.get() > Constants.Autonomous.kAutoLength;
   }
 }
