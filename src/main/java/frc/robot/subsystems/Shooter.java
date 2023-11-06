@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
-  CANSparkMax shooterMotor = MotorControllerFactory.createSparkMax(3, MotorConfig.NEO);
+  CANSparkMax shooterMotor = MotorControllerFactory.createSparkMax(5, MotorConfig.NEO);
   RelativeEncoder shootEncoder = shooterMotor.getEncoder();
 
   //ask about using CANSparkMax's built in pid controller vs this one, what are differences?

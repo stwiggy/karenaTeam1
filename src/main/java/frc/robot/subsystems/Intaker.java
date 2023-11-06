@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intaker extends SubsystemBase {
   public int onOff = 0;
-  private static CANSparkMax intakeMotor = MotorControllerFactory.createSparkMax(0, MotorConfig.NEO);
+  private static CANSparkMax intakeMotor = MotorControllerFactory.createSparkMax(3, MotorConfig.NEO);
 
   /** Creates a new Intaker. */
   public Intaker() {}

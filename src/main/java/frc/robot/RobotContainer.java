@@ -13,14 +13,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Autonomous;
 import frc.robot.subsystems.Intaker;
 
-
-
 public class RobotContainer {
   public static final Drivetrain drivetrain = new Drivetrain();
   public static final Intaker intaker = new Intaker();
   public static final Shooter shooter = new Shooter();
   public static final XboxController controller = new XboxController(0);
-  //public static final XboxController controller2 = new XboxController(1);
 
   public RobotContainer() {
     configureBindings();
@@ -41,16 +38,12 @@ public class RobotContainer {
   }
 
   public void periodic(){
-    /*
     if (drivetrain.isTank == true){
-      //drivetrain.drive(0 - controller.getLeftY(), 0 - controller.getRightY());   
+      drivetrain.drive(0 - controller.getLeftY(), 0 - controller.getRightY());   
     }
     else {
-      //drivetrain.arcadeDrive(controller.getRawAxis(1), controller.getRawAxis(4));
       drivetrain.arcadeDrive(0 - controller.getLeftY(), 0 - controller.getRightX());
     }
-    */
-    drivetrain.arcadeDrive(0 - controller.getLeftY(), 0 - controller.getRightX());
     
     if (intaker.onOff % 2 == 0){
       intaker.stop();

@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class Autonomous extends CommandBase {
   Drivetrain drivetrain;
   private final Timer time = new Timer();
-  CANSparkMax TEST = MotorControllerFactory.createSparkMax(9, MotorConfig.NEO);
+  CANSparkMax TEST = MotorControllerFactory.createSparkMax(2, MotorConfig.NEO);
 
   /** Creates a new Autonomous. */
   public Autonomous(Drivetrain dt) {
