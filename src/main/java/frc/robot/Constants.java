@@ -32,7 +32,7 @@ public final class Constants {
     }
 
     public static class OI{
-        public static final int kControllerPort = 0;
+        public static final int kDriverPort = 0;
         public static final int kOperatorPort = 1;
 
         public static final int kButtonANum = 1;

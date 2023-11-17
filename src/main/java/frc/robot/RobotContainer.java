@@ -16,9 +16,9 @@ import frc.robot.subsystems.Intaker;
 public class RobotContainer {
   public static final Intaker intaker = new Intaker();
   public static final Shooter shooter = new Shooter();
-  public static final XboxController controller = new XboxController(Constants.OI.kControllerPort);
+  public static final XboxController driver = new XboxController(Constants.OI.kDriverPort);
   public static final XboxController operator = new XboxController(Constants.OI.kOperatorPort);
-  public static final Drivetrain drivetrain = new Drivetrain(controller);
+  public static final Drivetrain drivetrain = new Drivetrain(driver);
 
 
   public RobotContainer() {
@@ -28,13 +28,13 @@ public class RobotContainer {
   //bind buttons and commands
   private void configureBindings() {
     //these buttons a and b r for testing
-    JoystickButton buttonA1 = new JoystickButton(controller, Constants.OI.kButtonANum);
-    JoystickButton buttonB1 = new JoystickButton(controller, Constants.OI.kButtonBNum);
-    JoystickButton buttonX1 = new JoystickButton(controller, Constants.OI.kButtonXNum);
-    JoystickButton buttonY1 = new JoystickButton(controller, Constants.OI.kButtonYNum);
+    JoystickButton buttonA1 = new JoystickButton(driver, Constants.OI.kButtonANum);
+    JoystickButton buttonB1 = new JoystickButton(driver, Constants.OI.kButtonBNum);
+    JoystickButton buttonX1 = new JoystickButton(driver, Constants.OI.kButtonXNum);
+    JoystickButton buttonY1 = new JoystickButton(driver, Constants.OI.kButtonYNum);
 
-    JoystickButton leftBumper = new JoystickButton(controller, Constants.OI.kLeftBumperNum);
-    JoystickButton rightBumper = new JoystickButton(controller, Constants.OI.kRightBumperNum);
+    JoystickButton leftBumper = new JoystickButton(operator, Constants.OI.kLeftBumperNum);
+    JoystickButton rightBumper = new JoystickButton(operator, Constants.OI.kRightBumperNum);
     JoystickButton buttonA2 = new JoystickButton(operator, Constants.OI.kButtonANum);
     JoystickButton buttonB2 = new JoystickButton(operator, Constants.OI.kButtonBNum);
     JoystickButton buttonX2 = new JoystickButton(operator, Constants.OI.kButtonXNum);
