@@ -9,8 +9,8 @@ import org.carlmontrobotics.lib199.MotorConfig;
 import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
-    private static CANSparkMax leftMotor = MotorControllerFactory.createSparkMax(0, MotorConfig.NEO);
-    private static CANSparkMax rightMotor = MotorControllerFactory.createSparkMax(9, MotorConfig.NEO);
+    private static CANSparkMax leftMotor = MotorControllerFactory.createSparkMax(Constants.MotorPort.kLeftDriveID, MotorConfig.NEO);
+    private static CANSparkMax rightMotor = MotorControllerFactory.createSparkMax(Constants.MotorPort.kRightDriveID, MotorConfig.NEO);
     private XboxController controller;
     public boolean isTank = false;
     

@@ -8,11 +8,11 @@ import org.carlmontrobotics.lib199.MotorConfig;
 import org.carlmontrobotics.lib199.MotorControllerFactory;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Intaker extends SubsystemBase {
-  public boolean off = false;
-  public int onOff = 0;
-  private static CANSparkMax intakeMotor = MotorControllerFactory.createSparkMax(3, MotorConfig.NEO);
+  public boolean off = true;
+  private static CANSparkMax intakeMotor = MotorControllerFactory.createSparkMax(Constants.MotorPort.kIntakeID, MotorConfig.NEO);
 
   /** Creates a new Intaker. */
   public Intaker() {}
@@ -25,18 +25,13 @@ public class Intaker extends SubsystemBase {
     intakeMotor.set(0);
   }
 
-  //how to call functions in lambda?
   public void onOff(){
     off = !off;
   }
 
   @Override
   public void periodic(){
-    if (onOff % 2 == 0){
-      stop();
-    }
-    else{
-      suck();
-    }
+    if (off){stop();}
+    else{suck();}
   }
 }

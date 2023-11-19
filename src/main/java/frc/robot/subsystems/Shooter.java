@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
-  CANSparkMax shooterMotor = MotorControllerFactory.createSparkMax(5, MotorConfig.NEO);
+  private boolean off = true;
+  CANSparkMax shooterMotor = MotorControllerFactory.createSparkMax(Constants.MotorPort.kShooterID, MotorConfig.NEO);
   RelativeEncoder shootEncoder = shooterMotor.getEncoder();
-  public int onOff = 0;
 
   //ask about using CANSparkMax's built in pid controller vs this one, what are differences?
   PIDController pid = new PIDController(Constants.Shooter.kP, Constants.Shooter.kI, Constants.Shooter.kD);
@@ -25,6 +25,9 @@ public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */
   public Shooter() {}
 
+  public void onOff(){
+    off = !off;
+  }
 
   public void setStdRPM(){
     goalRPM = Constants.Shooter.kShootWantedRPM;
@@ -38,20 +41,17 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putNumber("Shooter speed", shootEncoder.getVelocity());
     SmartDashboard.putNumber("Shooter goal", goalRPM);
+    SmartDashboard.putBoolean("off", off);
 
     //getVelocity gets the current RPM
     if (goalRPM != 0){
       double pidOut = pid.calculate(shootEncoder.getVelocity(), goalRPM);
       SmartDashboard.putNumber("PID output", pidOut);
-      shooterMotor.set(pidOut);
+      shooterMotor.set(-pidOut);
     }
 
-    if (onOff % 2 == 0){
-      setStdRPM();
-    }
-    else{
-      stopShooter();
-    }
+    if (off){setStdRPM();}
+    else{stopShooter();}
   }
 
 }

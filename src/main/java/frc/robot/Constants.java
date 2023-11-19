@@ -19,9 +19,15 @@ public final class Constants {
         public static final int kAutoLength = 5;
     }
 
+    public static class MotorPort {
+        public static final int kLeftDriveID = 0;
+        public static final int kRightDriveID = 1;
+        public static final int kIntakeID = 2;
+        public static final int kShooterID = 3;
+    }
     public static class Drivetrain {
-        public static final double kTurnSlowdown = 0.3;
-        public static final double kSpeedSlowdown = 0.6;
+        public static final double kTurnSlowdown = 1;
+        public static final double kSpeedSlowdown = 1;
     }
 
     public static class Shooter{

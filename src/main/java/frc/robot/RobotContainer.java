@@ -27,7 +27,6 @@ public class RobotContainer {
 
   //bind buttons and commands
   private void configureBindings() {
-    //these buttons a and b r for testing
     JoystickButton buttonA1 = new JoystickButton(driver, Constants.OI.kButtonANum);
     JoystickButton buttonB1 = new JoystickButton(driver, Constants.OI.kButtonBNum);
     JoystickButton buttonX1 = new JoystickButton(driver, Constants.OI.kButtonXNum);
@@ -40,8 +39,10 @@ public class RobotContainer {
     JoystickButton buttonX2 = new JoystickButton(operator, Constants.OI.kButtonXNum);
     JoystickButton buttonY2 = new JoystickButton(operator, Constants.OI.kButtonYNum);
 
-    buttonA1.onTrue(new InstantCommand(() -> {intaker.onOff++;}));
-    buttonB1.onTrue(new InstantCommand(() -> {shooter.onOff++;}));
+    buttonA1.onTrue(new InstantCommand((intaker::onOff)));
+
+    //button B works
+    buttonB1.onTrue(new InstantCommand((shooter::onOff)));
     buttonX1.onTrue(new InstantCommand(() -> {drivetrain.isTank = true;}));
     buttonY1.onTrue(new InstantCommand(() -> {drivetrain.isTank = false;}));
   }
