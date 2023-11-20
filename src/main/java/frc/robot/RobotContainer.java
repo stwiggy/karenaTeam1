@@ -43,10 +43,16 @@ public class RobotContainer {
 
     //button B works
     buttonB1.onTrue(new InstantCommand((shooter::onOff)));
+
+    //button X works
     buttonX1.onTrue(new InstantCommand(() -> {drivetrain.isTank = true;}));
+
+    //button Y works
     buttonY1.onTrue(new InstantCommand(() -> {drivetrain.isTank = false;}));
   }
 
+  //autonomous timer works
+  //autonomous driving does not work
   public Command getAutonomousCommand(){
     return new Autonomous(drivetrain);
   }
